@@ -1,4 +1,4 @@
-module github.com/milisarge/spidsaml/v1
+module github.com/milisarge/spidsaml
 
 go 1.24.0
 
