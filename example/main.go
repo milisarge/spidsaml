@@ -15,7 +15,6 @@ import (
 )
 
 var sp *spidsaml.SP
-var sp2 *spidsaml.SP
 
 type ConfigFile struct {
 	Port                       string
@@ -97,6 +96,7 @@ func main() {
 	}
 	// 3. SP Nesnesini Oluştur
 	sp = &spidsaml.SP{
+		IDPEntityID: Config.IDPEntityID,
 		EntityID: Config.EntityID,
 		KeyFile:  Config.KeyFile,
 		CertFile: Config.CertFile,
