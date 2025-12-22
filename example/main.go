@@ -161,33 +161,6 @@ func metadata(c echo.Context) error {
     return c.String(http.StatusOK, sp.Metadata())
 }
 
-// This endpoint initiates SSO through the user-chosen Identity Provider.
-func _spidLogin(c echo.Context) error {
-    // Check that we have the mandatory 'idp' parameter and that it matches
-    // an available Identity Provider.
-    idp_param := c.QueryParam("idp")
-    idp, err := sp.GetIDP(idp_param)
-    if err != nil {
-	return c.HTML(http.StatusBadRequest, "Invalid IdP selected")
-    }
-    // Craft the AuthnRequest.
-    authnreq := sp.NewAuthnRequest(idp)
-    authnreq.AcsURL = Config.AcsUrls[0]
-
-    authnreq.AcsIndex = 0
-    authnreq.AttrIndex = 0
-    authnreq.Level = 1
-
-    // Save the ID of the Authnreq so that we can check it in the response
-    // in order to prevent forgery.
-    authnReqID = authnreq.ID
-
-    // We use redirecting method, IdP using its HTTP-Redirect binding.
-    // http.StatusSeeOther (303)
-    redirectURL := authnreq.RedirectURL()
-    return c.Redirect(http.StatusSeeOther, redirectURL)
-}
-
 func spidLogin(c echo.Context) error {
     // Check that we have the mandatory 'idp' parameter and that it matches
     // an available Identity Provider.
