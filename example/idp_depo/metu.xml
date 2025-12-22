@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui" xmlns:req-attr="urn:oasis:names:tc:SAML:protocol:ext:req-attr" entityID="https://idp.metu.edu.tr/idp/shibboleth">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">metu.edu.tr</shibmd:Scope>
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="en">Middle East Technical University</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="tr">Orta Doğu Teknik Üniversitesi</mdui:DisplayName>
+                <mdui:Description xml:lang="en">METU ID Validation Service</mdui:Description>
+                <mdui:Description xml:lang="tr">ODTÜ Kimlik Doğrulama Servisi</mdui:Description>
+                <mdui:Logo height="61" width="58">https://idp.metu.edu.tr/idp/images/odtu-logo.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIEKDCCApCgAwIBAgIVAJE9y48DDXvFicSMWKoBdO71d1CUMA0GCSqGSIb3DQEB
+CwUAMBoxGDAWBgNVBAMMD2lkcC5tZXR1LmVkdS50cjAeFw0yMTA2MDExMTM1NTFa
+Fw00MTA2MDExMTM1NTFaMBoxGDAWBgNVBAMMD2lkcC5tZXR1LmVkdS50cjCCAaIw
+DQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAIiT2p2ntvWnvZLnuI5ii9HTZB9H
+5WuZC+HWBdmsJdiLr8KJkWbwhHcKwlZvBzFpM6oDNZ+zc3v+Yz8rS09YfVGtCLSP
+8VeJ25fttsuXn1DsSNIDLW7zUKjHsTgaSS5rqMeNIpSc0158CejaRfolkc19RD3i
+Tdc1cieHccFKk3WPhq82r0fW4Sht+skueDhwLuNPq+gXlXwOAvD005OW8cQYahFp
+C3PtkXxKKahzMtJnGqglIQmNU2zqlklT0T3uS//047bLXUQqWdYYdMNKw8/z7k+p
+5cJEFaw7nSWbX57PWo7TbesnMO/sub6E9l1EeCFr7Bxh6NgYgROQVh/v6qG8Ws+Z
+iL3zuYmGigPHO4ZUVyRUSyNZ9riIKoE5i4SJWZkyCTaMExw6DkbL6iNLcdq1OFl9
+v5oAuDPrcpmt20xD4mZxkVTwo37mkPzkG55Esw2nAwV+gHv1fd01SP6Wcx20+GPY
+0cwqRpTRHvp8OApglB/bkQng2XcdMdeVmpIrvwIDAQABo2UwYzAdBgNVHQ4EFgQU
+CaCg6XfhNSyKzkhQ+VoevCI3degwQgYDVR0RBDswOYIPaWRwLm1ldHUuZWR1LnRy
+hiZodHRwczovL2lkcC5tZXR1LmVkdS50ci9pZHAvc2hpYmJvbGV0aDANBgkqhkiG
+9w0BAQsFAAOCAYEAKLjjFR2v7OmjrgZ9/QefrQFthAao1PI15j5kOpHLeSszaXbs
+oOEv8bomPkUa8Jit9YnQfXpBPJUv3KAuwiVO4eJxwIHuF92LwLk8+RnZbsOzQ1F2
+Gi7ffmp/MZXp7M0SG30479h+Ts6ei169ssTNIqZniBXHE8GcpO4/WtpWJmPZxnz1
+NLhW7KueLNi5mby4/ARKecNyEXR7zJYmohz8QTnptyMMRvdP5FheY2A7x2A9UyhT
+onvDFm6omopSQctdGYm1t8J9sFZ9BD1yvSXY1Iac1O2XDf691Te/RNVsNjCJbNxt
+mqyvUJ4535Loy8Mlf21aOCk6P1vyYBllwmu5nAeJGGz5L/POEiegzcWIalEEXEJa
+mVPZrDmp9NVKJeY426nDFc6vPCsArQoCKmPXWzLoOeaEJCCbE1W0qOc/oS4vPnoq
+6DZ2r0ML6bCsg/n8ko7uKK1vKNzWjwQk5Ftl2X/B7zAldULcKgJ5mEls0NCJKash
+ecYxVKd5hCIM3Rgu
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIEJzCCAo+gAwIBAgIUfNcKwt9+jdNiGE7W/SlsSsmwjR4wDQYJKoZIhvcNAQEL
+BQAwGjEYMBYGA1UEAwwPaWRwLm1ldHUuZWR1LnRyMB4XDTIxMDYwMTExMzU1MVoX
+DTQxMDYwMTExMzU1MVowGjEYMBYGA1UEAwwPaWRwLm1ldHUuZWR1LnRyMIIBojAN
+BgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0bU3Zx+Rv9UGmJx6eXeeWT20EkFE
+hwA284IInkIHckZoK2WXZoAfXaqN+/3r0BxwCZfvtRIeCpfUFDSBk6e9Fcu76/pU
+REK+zINg42TW1WOqd/WdU+6iKvs2O+k3l1OENmWSARTqneuVyo8DTUsr5BOkh5M4
+pjHiZtezkhgtGQIYLedhPK8vVhQ2bM7Dweviav/+W541byuD9k2e762Zv+YxxCpg
+1wKWBITH2y0RzkOAB5+tZOGzA6XnQVbr5K0ZLPKFvVBJQsxKDRi8rB1XreKqhynb
+NCdLAdHIK+En+JQJIAVcYEy5TpOUK2MH91YZC7tdxb+90wGDYH/J3G8sv/as0FNV
+DyBd6qeayw2tnKf8mrm0BR0VY94FzGGnVQEbVvzob9U4S6QinrrL/1WYQKems2tL
+UbChLQEVAtHsuH85/fXpiP3yPYDsTwJmh0uVyTZnRGXwvRjPX8+l78VWP7Lgud+B
+kNNXqGA6LK042QRwqVAXC7//tM5Rws6PPTNTAgMBAAGjZTBjMB0GA1UdDgQWBBQn
+M0Iy+UT5sRLiW5vnf2ooL82iWjBCBgNVHREEOzA5gg9pZHAubWV0dS5lZHUudHKG
+Jmh0dHBzOi8vaWRwLm1ldHUuZWR1LnRyL2lkcC9zaGliYm9sZXRoMA0GCSqGSIb3
+DQEBCwUAA4IBgQBr3AIpugfO8gN902igAqAAKtwcD3Vffk9cNdZ3ke7WHJOaWKjT
+6LAFwuKZndW7DV8UAJysAXxWwhijtl12XcF8GEZ9MX5+ODZRR1wbRMLuMPUhVVET
+sJ+57BPbUyILTiEbClHIk7ca9En2rB+7E8jR9cFSG1/fTknPS6sd0qO/1b48X3ff
++Jp2RkJYNNE9aUum4UioWkTx8wvfudPtoe1nFjwHxiF3z908BGFjGUGJMk7lBzQT
+uxlSkCHJFVF6/b781R49BPzlP72rrJpsXgKLQfvi5aYx34StPq+S9ZzSHQI+KZ0l
+wPANMDkvp3MlIwW2k1JFrfxxMRvpOrO31MRlR/00lN4enxz1oYCPYLfkCMKoYZfk
+2vrihHyinOqlzos7bwkTgsEn2Hrcsvj7OQ0EAqfKDs44stCUaafZNK9zAls+hRf1
+MrjDMhwMuUDT4QKYBuW3DzXpnaLIbgJ4QzN23EB341xuNPmku4O8iUBzpzO5k2H4
+dDLr392heIjoC/8=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.metu.edu.tr/idp/profile/SAML2/SOAP/ArtifactResolution" index="1"/>
+
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.metu.edu.tr/idp/profile/SAML2/POST-SimpleSign/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.metu.edu.tr/idp/profile/SAML2/POST/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.metu.edu.tr/idp/profile/SAML2/SOAP/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.metu.edu.tr/idp/profile/SAML2/Redirect/SLO"/>
+
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" req-attr:supportsRequestedAttributes="true" Location="https://idp.metu.edu.tr/idp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" req-attr:supportsRequestedAttributes="true" Location="https://idp.metu.edu.tr/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" req-attr:supportsRequestedAttributes="true" Location="https://idp.metu.edu.tr/idp/profile/SAML2/Redirect/SSO"/>
+ 
+    </IDPSSODescriptor>
+
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">metu.edu.tr</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIEKDCCApCgAwIBAgIVAJE9y48DDXvFicSMWKoBdO71d1CUMA0GCSqGSIb3DQEB
+CwUAMBoxGDAWBgNVBAMMD2lkcC5tZXR1LmVkdS50cjAeFw0yMTA2MDExMTM1NTFa
+Fw00MTA2MDExMTM1NTFaMBoxGDAWBgNVBAMMD2lkcC5tZXR1LmVkdS50cjCCAaIw
+DQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAIiT2p2ntvWnvZLnuI5ii9HTZB9H
+5WuZC+HWBdmsJdiLr8KJkWbwhHcKwlZvBzFpM6oDNZ+zc3v+Yz8rS09YfVGtCLSP
+8VeJ25fttsuXn1DsSNIDLW7zUKjHsTgaSS5rqMeNIpSc0158CejaRfolkc19RD3i
+Tdc1cieHccFKk3WPhq82r0fW4Sht+skueDhwLuNPq+gXlXwOAvD005OW8cQYahFp
+C3PtkXxKKahzMtJnGqglIQmNU2zqlklT0T3uS//047bLXUQqWdYYdMNKw8/z7k+p
+5cJEFaw7nSWbX57PWo7TbesnMO/sub6E9l1EeCFr7Bxh6NgYgROQVh/v6qG8Ws+Z
+iL3zuYmGigPHO4ZUVyRUSyNZ9riIKoE5i4SJWZkyCTaMExw6DkbL6iNLcdq1OFl9
+v5oAuDPrcpmt20xD4mZxkVTwo37mkPzkG55Esw2nAwV+gHv1fd01SP6Wcx20+GPY
+0cwqRpTRHvp8OApglB/bkQng2XcdMdeVmpIrvwIDAQABo2UwYzAdBgNVHQ4EFgQU
+CaCg6XfhNSyKzkhQ+VoevCI3degwQgYDVR0RBDswOYIPaWRwLm1ldHUuZWR1LnRy
+hiZodHRwczovL2lkcC5tZXR1LmVkdS50ci9pZHAvc2hpYmJvbGV0aDANBgkqhkiG
+9w0BAQsFAAOCAYEAKLjjFR2v7OmjrgZ9/QefrQFthAao1PI15j5kOpHLeSszaXbs
+oOEv8bomPkUa8Jit9YnQfXpBPJUv3KAuwiVO4eJxwIHuF92LwLk8+RnZbsOzQ1F2
+Gi7ffmp/MZXp7M0SG30479h+Ts6ei169ssTNIqZniBXHE8GcpO4/WtpWJmPZxnz1
+NLhW7KueLNi5mby4/ARKecNyEXR7zJYmohz8QTnptyMMRvdP5FheY2A7x2A9UyhT
+onvDFm6omopSQctdGYm1t8J9sFZ9BD1yvSXY1Iac1O2XDf691Te/RNVsNjCJbNxt
+mqyvUJ4535Loy8Mlf21aOCk6P1vyYBllwmu5nAeJGGz5L/POEiegzcWIalEEXEJa
+mVPZrDmp9NVKJeY426nDFc6vPCsArQoCKmPXWzLoOeaEJCCbE1W0qOc/oS4vPnoq
+6DZ2r0ML6bCsg/n8ko7uKK1vKNzWjwQk5Ftl2X/B7zAldULcKgJ5mEls0NCJKash
+ecYxVKd5hCIM3Rgu
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIEJzCCAo+gAwIBAgIUfNcKwt9+jdNiGE7W/SlsSsmwjR4wDQYJKoZIhvcNAQEL
+BQAwGjEYMBYGA1UEAwwPaWRwLm1ldHUuZWR1LnRyMB4XDTIxMDYwMTExMzU1MVoX
+DTQxMDYwMTExMzU1MVowGjEYMBYGA1UEAwwPaWRwLm1ldHUuZWR1LnRyMIIBojAN
+BgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA0bU3Zx+Rv9UGmJx6eXeeWT20EkFE
+hwA284IInkIHckZoK2WXZoAfXaqN+/3r0BxwCZfvtRIeCpfUFDSBk6e9Fcu76/pU
+REK+zINg42TW1WOqd/WdU+6iKvs2O+k3l1OENmWSARTqneuVyo8DTUsr5BOkh5M4
+pjHiZtezkhgtGQIYLedhPK8vVhQ2bM7Dweviav/+W541byuD9k2e762Zv+YxxCpg
+1wKWBITH2y0RzkOAB5+tZOGzA6XnQVbr5K0ZLPKFvVBJQsxKDRi8rB1XreKqhynb
+NCdLAdHIK+En+JQJIAVcYEy5TpOUK2MH91YZC7tdxb+90wGDYH/J3G8sv/as0FNV
+DyBd6qeayw2tnKf8mrm0BR0VY94FzGGnVQEbVvzob9U4S6QinrrL/1WYQKems2tL
+UbChLQEVAtHsuH85/fXpiP3yPYDsTwJmh0uVyTZnRGXwvRjPX8+l78VWP7Lgud+B
+kNNXqGA6LK042QRwqVAXC7//tM5Rws6PPTNTAgMBAAGjZTBjMB0GA1UdDgQWBBQn
+M0Iy+UT5sRLiW5vnf2ooL82iWjBCBgNVHREEOzA5gg9pZHAubWV0dS5lZHUudHKG
+Jmh0dHBzOi8vaWRwLm1ldHUuZWR1LnRyL2lkcC9zaGliYm9sZXRoMA0GCSqGSIb3
+DQEBCwUAA4IBgQBr3AIpugfO8gN902igAqAAKtwcD3Vffk9cNdZ3ke7WHJOaWKjT
+6LAFwuKZndW7DV8UAJysAXxWwhijtl12XcF8GEZ9MX5+ODZRR1wbRMLuMPUhVVET
+sJ+57BPbUyILTiEbClHIk7ca9En2rB+7E8jR9cFSG1/fTknPS6sd0qO/1b48X3ff
++Jp2RkJYNNE9aUum4UioWkTx8wvfudPtoe1nFjwHxiF3z908BGFjGUGJMk7lBzQT
+uxlSkCHJFVF6/b781R49BPzlP72rrJpsXgKLQfvi5aYx34StPq+S9ZzSHQI+KZ0l
+wPANMDkvp3MlIwW2k1JFrfxxMRvpOrO31MRlR/00lN4enxz1oYCPYLfkCMKoYZfk
+2vrihHyinOqlzos7bwkTgsEn2Hrcsvj7OQ0EAqfKDs44stCUaafZNK9zAls+hRf1
+MrjDMhwMuUDT4QKYBuW3DzXpnaLIbgJ4QzN23EB341xuNPmku4O8iUBzpzO5k2H4
+dDLr392heIjoC/8=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.metu.edu.tr/idp/profile/SAML2/SOAP/AttributeQuery"/> 
+
+    </AttributeAuthorityDescriptor>
+    <Organization>
+	    <OrganizationName xml:lang="tr">Orta Doğu Teknik Üniversitesi</OrganizationName>
+	    <OrganizationName xml:lang="en">Middle East Technical University</OrganizationName>
+	    <OrganizationDisplayName xml:lang="tr">Orta Doğu Teknik Üniversitesi</OrganizationDisplayName>
+	    <OrganizationDisplayName xml:lang="en">Middle East Technical University</OrganizationDisplayName>
+	    <OrganizationURL xml:lang="tr">https://www.metu.edu.tr/tr</OrganizationURL>
+	    <OrganizationURL xml:lang="en">https://www.metu.edu.tr</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="support">
+	    <!--   <GivenName xml:lang="tr">Orta Doğu Teknik Üniversitesi</GivenName> -->
+	    <GivenName>Middle East Technical University</GivenName>
+	    <!-- <SurName xml:lang="tr">Bilgi İşlem Daire Başkanlığı</SurName> -->
+	    <SurName>Computer Center</SurName>
+	    <EmailAddress>mailto:hotline@metu.edu.tr</EmailAddress>
+    </ContactPerson>
+    <ContactPerson contactType="technical">
+	    <GivenName>METU-CC</GivenName>
+	    <EmailAddress>mailto:cctsg@metu.edu.tr</EmailAddress>
+    </ContactPerson>
+
+
+</EntityDescriptor>

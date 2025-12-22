@@ -83,6 +83,7 @@ const (
 
 // SP represents our Service Provider
 type SP struct {
+	IDPEntityID                string
 	EntityID                   string
 	Key                        []byte
 	KeyFile                    string
