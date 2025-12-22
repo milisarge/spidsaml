@@ -19,6 +19,7 @@ var sp2 *spidsaml.SP
 
 type ConfigFile struct {
 	Port                       string
+	IDPEntityID                string
 	EntityID                   string
 	KeyFile                    string
 	CertFile                   string
