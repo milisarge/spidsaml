@@ -3,8 +3,8 @@
 Port = "8088"
 IDPEntityID = "https://my.edu/idp/shibboleth"
 EntityID = "https://my.edu/saml/metadata"
-KeyFile = "./certs/sp.key"
-CertFile = "./certs/sp.crt"
+KeyFile = "./certs/key.pem"
+CertFile = "./certs/cert.pem"
 
 # Assertion Consumer Service (ACS) URL'leri
 AcsUrls = ["https://my.edu/saml/acs"]
