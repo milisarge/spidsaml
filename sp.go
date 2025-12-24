@@ -23,26 +23,6 @@ import (
 	"github.com/beevik/etree"
 )
 
-var AttributeMap = map[string]string{
-        "displayName":             "urn:oid:2.16.840.1.113730.3.1.241",
-        "givenName":               "urn:oid:2.5.4.42",
-        "surname":                 "urn:oid:2.5.4.4",
-        "cn":                      "urn:oid:2.5.4.3",
-        "sn":                      "urn:oid:2.5.4.4",
-        "uid":                     "urn:oid:0.9.2342.19200300.100.1.1",
-        "mail":                   "urn:oid:0.9.2342.19200300.100.1.3",
-        "schacPersonalUniqueCode": "urn:oid:1.3.6.1.4.1.25178.1.2.14",
-        "schacHomeOrganization":   "urn:oid:1.3.6.1.4.1.25178.1.2.9",
-        "eduPersonOrcid":          "urn:oid:1.3.6.1.4.1.5923.1.1.1.16",
-        "eduPersonUniqueId":       "urn:oid:1.3.6.1.4.1.5923.1.1.1.13",
-        "eduPersonAssurance":      "urn:oid:1.3.6.1.4.1.5923.1.1.1.11",
-        "eduPersonTargetedID":     "urn:oid:1.3.6.1.4.1.5923.1.1.1.10",
-        "eduPersonScopedAffiliation": "urn:oid:1.3.6.1.4.1.5923.1.1.1.9",
-        "eduPersonEntitlement":    "urn:oid:1.3.6.1.4.1.5923.1.1.1.7",
-        "eduPersonPrincipalName":  "urn:oid:1.3.6.1.4.1.5923.1.1.1.6",
-	"eduPersonAffiliation"  :  "urn:oid:1.3.6.1.4.1.5923.1.1.1.1",
-}
-
 type ServiceName struct {
 	Lang string
 	Name string

@@ -5,44 +5,17 @@ import (
 	"html/template"
 	"io"
 	"net/http"
-	"github.com/milisarge/spidsaml"
-	"github.com/BurntSushi/toml"
-	"log"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/golang-jwt/jwt/v5"
+    "github.com/labstack/echo/v4"
+    "github.com/labstack/echo/v4/middleware"
+    "github.com/golang-jwt/jwt/v5"
 	"time"
+	"github.com/milisarge/spidsaml"
 )
 
 var sp *spidsaml.SP
 
-type ConfigFile struct {
-	Port                       string
-	IDPEntityID                string
-	EntityID                   string
-	KeyFile                    string
-	CertFile                   string
-	AcsUrls                    []string `toml:"AcsUrls"`
-	SlsUrls                    []string `toml:"SlsUrls"`
-	// AttributeConsumingServices, TOML'daki array of tables yapısını yansıtır.
-	AttributeConsumingServices []ConfigAttributeConsumingService
-}
-
-type ConfigServiceDetails struct {
-    ServiceNames []spidsaml.ServiceName `toml:"ServiceNames"`
-    Attributes   []string               `toml:"Attributes"`
-}
-
-type ConfigAttributeConsumingService struct {
-    // TOML'daki [AttributeConsumingServices.Details] tablosunu okuyacak
-    Details ConfigServiceDetails `toml:"Details"`
-}
-
-// Global olarak tanımlanan ve kullanılacak olan konfigurasyon nesnesi
-var Config ConfigFile
-
 // JWT imza
-const jwtSecret = "cokgizlibirparolmjwticin"
+const jwtSecret = "jwtgizlibiranahtar"
 
 // JWT yapısı
 type SpidClaims struct {
@@ -66,76 +39,14 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func main() {
-
-    // 1. TOML dosyasını oku
-	if _, err := toml.DecodeFile("settings.toml", &Config); err != nil {
-		log.Fatalf("TOML dosyasını okuma hatası: %v", err)
-	}
-	// 2. spidsaml.Attribute listesini oluştur
-	// TOML'dan okunan string array'ini, spidsaml'in istediği formata dönüştür
-	var finalAttributes []spidsaml.Attribute
-	// İlk ve tek ACS'yi varsayıyoruz
-	if len(Config.AttributeConsumingServices) > 0 {
-	  tomlAttrs := Config.AttributeConsumingServices[0].Details.Attributes
-	  for _, attrName := range tomlAttrs {
-	  // AttributeMap içindeki Name'i bul ve spidsaml.Attribute yapısını oluştur
-	    if oid, ok := spidsaml.AttributeMap[attrName]; ok {
-	    // Son alan ("true") hardcoded olarak veya TOML'dan alınabilir.
-	    // Örnekte hardcoded kullandık.
-	      finalAttributes = append(finalAttributes, spidsaml.Attribute{
-		FriendlyName: attrName,
-		Name:    oid,
-		IsRequired: "true",
-	      })
-	    } else {
-		log.Printf("UYARI: Bilinmeyen öznitelik adı atlandı: %s", attrName)
-	    }
-	  }
-	} else {
-		log.Fatal("HATA: config.toml içinde AttributeConsumingServices tanımlı değil.")
-	}
-	// 3. SP Nesnesini Oluştur
-	sp = &spidsaml.SP{
-		IDPEntityID: Config.IDPEntityID,
-		EntityID: Config.EntityID,
-		KeyFile:  Config.KeyFile,
-		CertFile: Config.CertFile,
-		AssertionConsumerServices: Config.AcsUrls,
-		// SingleLogoutServices için binding ataması
-		SingleLogoutServices: map[string]spidsaml.SAMLBinding{},
-		// AttributeConsumingServices oluştur
-		AttributeConsumingServices: []spidsaml.AttributeConsumingService{
-		  {
-			ServiceNames: Config.AttributeConsumingServices[0].Details.ServiceNames,
-			Attributes:   finalAttributes, // Dinamik olarak oluşturulan liste
-		  },
-		},
-	}
-
-    // Sadece bir SLS URL'si olduğunu ve Binding'in HTTPRedirect olduğunu varsayıyoruz
-	if len(Config.SlsUrls) > 0 {
-      // sp nesnesinin içindeki SingleLogoutServices haritasına yeni bir giriş ekle.
-      sp.SingleLogoutServices[Config.SlsUrls[0]] = spidsaml.HTTPRedirect
-    }
-
-	// Load Identity Providers from their XML metadata
-	err := sp.LoadIDPMetadata("./idp_depo")
-	if err != nil {
-		fmt.Print("Failed to load IdP metadata: ")
-		fmt.Println(err)
-		return
-	}
-
+	sp = spidsaml.ConfigureSP("sp.toml")
 	// Web framework
 	t := &Template{
-          templates: template.Must(
-          template.New("").Funcs(template.FuncMap{
-            "add": func(a, b int) int { return a + b },
-            //"formatTime": func(i int64) time.Time { return fileTimeToUTC(i) },
-            //"adjustTime": addTimeDelta,
-          }).ParseGlob("templates/*.html")),
-        }
-        // */
+      templates: template.Must(
+      template.New("").Funcs(template.FuncMap{
+        "add": func(a, b int) int { return a + b },
+      }).ParseGlob("templates/*.html")),
+    }
 	e := echo.New()
 	e.Static("/static", "static")
 	e.Use(middleware.Recover())
@@ -143,16 +54,16 @@ func main() {
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: "${time_rfc3339} | ${remote_ip} | ${method} ${uri} | ${status} | ${latency_human}\n",
 	}))
-	// Rotalar
+    // rotalar
 	e.GET("/",spidLogin)
 	e.GET("/anasayfa", ProtectedPageHandler, JWTMiddleware)
 	e.GET("/metadata",metadata)
 	e.POST("/acs",spidSSO)
 	e.GET("/logout",spidLogout)
 	e.GET("/sls",spidSLO)
-
-	fmt.Printf("Web application listening on port:%s\n", Config.Port)
-	e.Logger.Fatal(e.Start(":"+Config.Port))
+	Port := "9999"
+	fmt.Printf("spidsaml-go example application listening on http://localhost:%s\n", Port)
+	e.Logger.Fatal(e.Start(":"+Port))
 }
 
 // This endpoint exposes our metadata
@@ -162,16 +73,13 @@ func metadata(c echo.Context) error {
 }
 
 func spidLogin(c echo.Context) error {
-    // Check that we have the mandatory 'idp' parameter and that it matches
-    // an available Identity Provider.
-    // idp_depo altındaki metadata xml içindeki entityID
     idp, err := sp.GetIDP(sp.IDPEntityID)
     if err != nil {
 	return c.HTML(http.StatusBadRequest, "Invalid IdP selected")
     }
     // Craft the AuthnRequest.
     authnreq := sp.NewAuthnRequest(idp)
-    authnreq.AcsURL = Config.AcsUrls[0]
+    authnreq.AcsURL = sp.AssertionConsumerServices[0]
 
     authnreq.AcsIndex = 0
     authnreq.AttrIndex = 0
@@ -212,8 +120,12 @@ func spidSSO(c echo.Context) error {
     }
 
     if response.Success() {
-	    spidSession = response.Session()
-	    expirationTime := time.Now().Add(300 * time.Second)
+	spidSession = response.Session()
+	fmt.Println("open session uid:",spidSession.Attributes["uid"])
+	fmt.Println("open session givenName:",spidSession.Attributes["givenName"])
+	fmt.Println("open session sn:",spidSession.Attributes["sn"])
+	fmt.Println("open session mail:",spidSession.Attributes["mail"])
+	expirationTime := time.Now().Add(300 * time.Second)
         claims := &SpidClaims{
             UserID: spidSession.Attributes["uid"],
             Name:   spidSession.Attributes["givenName"],
@@ -232,25 +144,25 @@ func spidSSO(c echo.Context) error {
             fmt.Printf("JWT imzalama hatası: %s\n", err)
             return c.String(http.StatusInternalServerError, "Token oluşturulamadı.")
         }
-	    // 3. Token'ı HTTP Only Çerezine (Cookie) Göm
+	//return c.Redirect(http.StatusSeeOther, "/ssoweb?token="+tokenString)
+	// 3. Token'ı HTTP Only Çerezine (Cookie) Göm (En Güvenli Yöntem)
         cookie := new(http.Cookie)
         cookie.Name = "auth_token"
         cookie.Value = tokenString
         //cookie.Expires = expirationTime
-        cookie.HttpOnly = true // JavaScript ile erişimi engelle XSS için
-        cookie.Secure = true   // Yalnızca HTTPS 
+        cookie.HttpOnly = true // JavaScript ile erişimi engeller (XSS saldırılarına karşı koruma)
+        cookie.Secure = true   // Yalnızca HTTPS üzerinden gönderilir (Üretim için zorunlu)
         cookie.Path = "/"      // Tüm site için geçerli
 
         c.SetCookie(cookie)
 
         // 4. Kullanıcıyı yönlendir
-	    return c.Redirect(http.StatusSeeOther, "anasayfa")
-    
+	return c.Redirect(http.StatusSeeOther, "anasayfa")
     } else {
-	    fmt.Printf("Authentication Failed: %s (%s)\n",
-	    response.StatusMessage(), response.StatusCode2())
-	    // 401 veya 400 durum kodu
-	    return c.String(http.StatusUnauthorized, response.StatusMessage()) 
+	fmt.Printf("Authentication Failed: %s (%s)\n",
+	response.StatusMessage(), response.StatusCode2())
+	// 401 veya 400 durum kodu
+	return c.String(http.StatusUnauthorized, response.StatusMessage()) 
     }
 }
 
@@ -302,6 +214,7 @@ func ProtectedPageHandler(c echo.Context) error {
         "Auth":auth,
     }
 
+    // Örneğin, bir HTML şablonu render et
     return c.Render(http.StatusOK, "index.html", data) 
 }
 
