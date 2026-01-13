@@ -1,4 +1,4 @@
-### SPID SAML Library for Go
+### SAML Library for Go
 
 - Customized from [spid-go](https://github.com/italia/spid-go) library.
 
